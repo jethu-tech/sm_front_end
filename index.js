@@ -53,6 +53,7 @@ $("#report").click(function () {
             url: base_url + "/report?key=" + key,
             method: 'GET',
             dataType: 'json',
+            headers: {"Access-Control-Allow-Origin": "*"},
             success: function (succes_data) {
                 alert('Report has been sent to Email ids.')
             },
@@ -79,7 +80,8 @@ $("#submit").click(function () {
         $.ajax({
             url: base_url + "/add",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             method: 'POST',
             dataType: 'json',
