@@ -48,6 +48,7 @@ $("#report").click(function () {
     if (key.trim() == "") {
         alert('Add value for Registration Code field.')
     } else {
+        show_loader();
         let base_url = "https://society-manager-jj9z.onrender.com";
         $.ajax({
             url: base_url + "/report?key=" + key,
@@ -56,17 +57,29 @@ $("#report").click(function () {
             headers: {"Access-Control-Allow-Origin": "*"},
             success: function (succes_data) {
                 alert('Report has been sent to Email ids.')
+                hide_loader();
             },
             error: function (error_data) {
                 alert(error_data['responseJSON']['message'])
+                hide_loader();
             }
 
         });
     }
 });
 
+function show_loader(){
+    $('#main_div').hide()
+    $('.loader').show()
+}
+function hide_loader(){
+    $('#main_div').show()
+    $('.loader').hide()
+}
+
 $("#submit").click(function () {
     initialize_fields();
+    show_loader();
 
     if (Validate_fields()) {
         let base_url = "https://society-manager-jj9z.onrender.com";
@@ -88,12 +101,14 @@ $("#submit").click(function () {
             data: JSON.stringify(data),
             success: function (succes_data) {
                 console.log('succes: ' + succes_data);
-                clear_fields()
-                alert(succes_data['message'])
+                clear_fields();
+                alert(succes_data['message']);
+                hide_loader()
             },
             error: function (error_data) {
                 console.log('error', error_data);
-                alert(error_data['responseJSON']['message'])
+                alert(error_data['responseJSON']['message']);
+                hide_loader();
             }
 
         });
