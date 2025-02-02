@@ -1,2 +1,2 @@
 # sm_front_end
-Front end to reduce call on server
+This old working front end which was getting used by users.
